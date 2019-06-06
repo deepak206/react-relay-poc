@@ -9,25 +9,25 @@
 /*::
 import type { ReaderFragment } from 'relay-runtime';
 import type { FragmentReference } from "relay-runtime";
-declare export opaque type ListPage_allPosts$ref: FragmentReference;
-declare export opaque type ListPage_allPosts$fragmentType: ListPage_allPosts$ref;
-export type ListPage_allPosts = {|
+declare export opaque type Page_page$ref: FragmentReference;
+declare export opaque type Page_page$fragmentType: Page_page$ref;
+export type Page_page = {|
   +id: string,
   +title: string,
   +text: string,
-  +$refType: ListPage_allPosts$ref,
+  +$refType: Page_page$ref,
 |};
-export type ListPage_allPosts$data = ListPage_allPosts;
-export type ListPage_allPosts$key = {
-  +$data?: ListPage_allPosts$data,
-  +$fragmentRefs: ListPage_allPosts$ref,
+export type Page_page$data = Page_page;
+export type Page_page$key = {
+  +$data?: Page_page$data,
+  +$fragmentRefs: Page_page$ref,
 };
 */
 
 
 const node/*: ReaderFragment*/ = {
   "kind": "Fragment",
-  "name": "ListPage_allPosts",
+  "name": "Page_page",
   "type": "Post",
   "metadata": null,
   "argumentDefinitions": [],
@@ -56,5 +56,5 @@ const node/*: ReaderFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '484198e7b8eef9e0c7471b7e198766df';
+(node/*: any*/).hash = '00123d4b61e8fc854e643bc77f1c90ac';
 module.exports = node;

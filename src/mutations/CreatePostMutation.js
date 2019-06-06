@@ -23,7 +23,6 @@ export default function CreatePostMutation(title, text, callback) {
       mutation,
       variables,
       onCompleted: (response) => {
-        console.log(response, environment)
         callback()
       },
       onError: err => console.error(err),        

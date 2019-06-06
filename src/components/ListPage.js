@@ -4,64 +4,53 @@ import '../App.css'
 import environment from '../config/Environment';
 import Header from './Header';
 import { number } from 'prop-types';
-
+import PageGrid from './PageGrid';
 
 class ListPage extends Component {
   static propTypes = {
     pageList: number,
   }
 
-  
+  state= {
+    data: []
+  }
+
   query = graphql`
   query ListPageQuery {
-      allPosts {
-        id
-        title
-        text
-      }
+      ...PageGrid_query  @relay(mask: false)
     }
   `;
 
-  componentDidMount() {
-    fetchQuery(environment, this.query)
-    .then(data => {
-     // this.props.dispatch(pageReducer(data.allPosts)) 
-    });
-  } 
+  // componentDidMount() {
+  //   fetchQuery(environment, this.query)
+  //   .then(data => {
+  //     this.setState({data: data})
+  //   });
+  // } 
 
   render() {
-    const { pageList } = this.props;
+
     return (
       <Fragment>  
       <Header/> 
       <div className="list">
-        <table>
-          <tr>
-              <th>User Id</th>              
-              <th>User Title</th>
-              <th>User Text</th>
-          </tr>
-          {pageList.length && pageList.map((node)=>(
-            <tr>
-              <td>{node.id}</td>
-              <td>{node.title}</td>
-              <td>{node.text} </td>
-            </tr>
-          ))}
-        </table>
+      <QueryRenderer
+        environment={environment}
+        query={this.query}
+        render={({error, props}) =>{
+          if (error) {
+            return <div>{error.message}</div>;
+          } else if (props) {
+            return (<PageGrid query={props.allPosts}/>
+            );
+          }
+          return <div>Loading</div>;
+        } }
+      />
       </div>
       </Fragment>
     )
   }
 }
 
-
-export default createFragmentContainer(ListPage, {
-  allPosts: graphql`
-    fragment ListPage_allPosts on Post {
-        id
-        title
-        text
-    }
-  `,
-});
+export default ListPage;

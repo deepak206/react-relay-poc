@@ -49,9 +49,7 @@ class CreatePage extends Component {
                     </tr>
                   ))}
               </table>
-        </div>    
-
-        
+        </div>
         </Fragment>     
     )
   }
